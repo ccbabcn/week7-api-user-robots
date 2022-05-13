@@ -2,7 +2,7 @@ const chalk = require("chalk");
 const debug = require("debug");
 const { mongoose } = require("mongoose");
 
-const connectDataBase = async (connectionString) =>
+const connectDataBase = (connectionString) =>
   new Promise((resolve, reject) => {
     mongoose.set("debug", true);
     mongoose.connect(connectionString, (error) => {

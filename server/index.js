@@ -1,6 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
-const { robotsRouter } = require("./routers/robotRouters");
+const robotsRouter = require("./routers/robotRouters");
 
 const app = express();
 

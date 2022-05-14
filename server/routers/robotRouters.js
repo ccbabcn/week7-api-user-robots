@@ -5,4 +5,4 @@ const robotsRouter = express.Router();
 
 robotsRouter.get("/robots", getRobots);
 
-module.exports = { robotsRouter };
+module.exports = robotsRouter;

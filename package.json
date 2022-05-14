@@ -36,7 +36,10 @@
       "*.js",
       "./**/*.js",
       "!.eslintrc.js",
-      "!coverage/**/*.js"
+      "!coverage/**/*.js",
+      "!./server/*.js",
+      "!./server/routers/*.js",
+      "!./database/*.js"
     ]
   }
 }

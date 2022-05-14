@@ -1,7 +1,6 @@
-const debug = require("debug");
+const debug = require("debug")("robots:api-initialize:root");
 const chalk = require("chalk");
-
-const app = require(".");
+const app = require("./index");
 
 const initializeServer = (port) => {
   const server = app.listen(port, () => {

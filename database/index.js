@@ -1,6 +1,6 @@
 const chalk = require("chalk");
-const debug = require("debug");
-const { mongoose } = require("mongoose");
+const debug = require("debug")("robots:api-database:root");
+const mongoose = require("mongoose");
 
 const connectDataBase = (connectionString) =>
   new Promise((resolve, reject) => {

@@ -1,17 +1,17 @@
 const mockRobots = [
   {
-    _id: 1,
+    id: 1,
     name: "Atutomata",
-    velovity: 0,
+    velocity: 0,
     resistance: 0,
     created: "10-10-2020",
     image:
       "https://cdn.babymarkt.com/babymarkt/img/961165/443/lexibook-power-hombre-estrella-mi-robot-de-edutainment-a320340.jpg",
   },
   {
-    _id: 2,
+    id: 2,
     name: "Terminator",
-    velovity: 0,
+    velocity: 0,
     resistance: 0,
     created: "12-5-2022",
     image:

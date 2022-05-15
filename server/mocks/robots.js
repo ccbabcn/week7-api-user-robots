@@ -1,6 +1,6 @@
 const mockRobots = [
   {
-    id: 1,
+    _id: "627ea56bfdab2d6eb4b72178",
     name: "Atutomata",
     velocity: 0,
     resistance: 0,
@@ -9,7 +9,7 @@ const mockRobots = [
       "https://cdn.babymarkt.com/babymarkt/img/961165/443/lexibook-power-hombre-estrella-mi-robot-de-edutainment-a320340.jpg",
   },
   {
-    id: 2,
+    _id: "6280e28666fdd6e9d550ccd8",
     name: "Terminator",
     velocity: 0,
     resistance: 0,
@@ -19,4 +19,14 @@ const mockRobots = [
   },
 ];
 
-module.exports = { mockRobots };
+const mockRobot = {
+  _id: "6280e28666fdd6e9d550ccd8",
+  name: "Terminator",
+  velocity: 0,
+  resistance: 0,
+  created: "12-5-2022",
+  image:
+    "https://cdn.babymarkt.com/babymarkt/img/961165/443/lexibook-power-hombre-estrella-mi-robot-de-edutainment-a320340.jpg",
+};
+
+module.exports = { mockRobots, mockRobot };

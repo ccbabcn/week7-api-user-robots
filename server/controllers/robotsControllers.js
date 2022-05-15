@@ -9,4 +9,11 @@ const getRobots = async (req, res) => {
   debug(chalk.white("Received a get request to the data base"));
 };
 
-module.exports = { getRobots };
+const deleteRobot = async (req, res) => {
+  const { idRobot } = req.params;
+  await Robot.findByIdAndDelete(idRobot);
+  res.status(200).json({ msg: "robot deleted" });
+  debug(chalk.white("Received a get request to the data base"));
+};
+
+module.exports = { getRobots, deleteRobot };

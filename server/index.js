@@ -17,6 +17,8 @@ app.use(morgan("dev")); // invoc un middleware que pasa toda la informacion de l
 
 app.use(express.json());
 
+// app.use(auth); protegeria todas las peticiones a mi api despues de esta ceclaracion
+
 app.use("/robots", auth, robotsRouter); // handlers o manejador de rutas, pasa todas las request que usan /robots* al enroutador
 app.use("/user", userRouter);
 

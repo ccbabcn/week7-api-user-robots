@@ -8,8 +8,11 @@ const notFoundError = (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 const generalError = (error, re, res, next) => {
-  res.status(500).json({ msg: "Internal server error" });
+  const statusCode = error.statusCode ?? 500;
+  const errorMessage = error.statusCode ? error.message : "general pete";
+
   debug(chalk.redBright(`Internal server error: ${error.message}`));
+  res.status(statusCode).json({ msg: errorMessage });
 };
 
 module.exports = { notFoundError, generalError };

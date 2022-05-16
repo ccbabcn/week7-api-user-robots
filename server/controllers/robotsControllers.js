@@ -10,7 +10,7 @@ const getRobots = async (req, res) => {
   debug(chalk.white("Received a get request to the data base"));
 };
 
-const getRobotsVelocityLess = async (req, res) => {
+const getRobotsbyOwner = async (req, res) => {
   const { userId } = req.headers;
   const robots = await Robot.find({ owner: userId });
   // velocity: { $lt: 5 }{owner: "idedeowner"} se le pide todos los robots con veloidad menor a 5 o solo con ese dueño
@@ -25,4 +25,8 @@ const deleteRobot = async (req, res) => {
   debug(chalk.white("Received a get request to the data base"));
 };
 
-module.exports = { getRobots, deleteRobot, getRobotsVelocityLess };
+module.exports = {
+  getRobots,
+  deleteRobot,
+  getRobotsVelocityLess: getRobotsbyOwner,
+};

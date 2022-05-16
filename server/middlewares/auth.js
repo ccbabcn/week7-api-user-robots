@@ -1,15 +1,24 @@
 const jwt = require("jsonwebtoken");
 
 const auth = (res, req, next) => {
-  const { authorization } = req.headers;
+  const { authorization } = req.headers; // a la api le ha de llegar este header con un Beare ....
 
-  const token = authorization.replace("Bearer ", "");
+  try {
+    if (!authorization.inclues("Bearer!")) {
+      throw new Error();
+    }
+    const token = authorization.replace("Bearer ", "");
 
-  const { id } = jwt.verify(token, process.env.JWT_SECRET);
+    const { id } = jwt.verify(token, process.env.JWT_SECRET); // en esta libreria si el token es incorrecto genera un error
 
-  req.userId = id; // añadimos la propiedad userId a la request para el siguiente middleware
+    req.userId = id; // añadimos la propiedad userId a la request para el siguiente middleware
 
-  next();
+    next();
+  } catch {
+    const customError = new Error("Invalid token");
+    customError.statusCode = 401; // le llegado esta propiedad al general error
+    next(customError);
+  }
 };
 
 module.exports = auth;

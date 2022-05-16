@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../../database/models/User");
 
 const loginUser = async (req, res) => {
-  const { username, password } = require.body;
+  const { username, password } = req.body;
 
   const user = await User.findOne({ username, password }); // findOne devuelve solo un objecto
 

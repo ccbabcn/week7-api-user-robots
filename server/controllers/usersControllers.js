@@ -9,8 +9,10 @@ const loginUser = async (req, res, next) => {
   const user = await User.findOne({ username }); // findOne devuelve solo un objecto, no ponemos  password para evitar desencriptar si user no exite
 
   if (!user) {
-    const error = new Error("Username or password are worng"); // siempre tiene que ser ambiguo por seguridad
-    error.code = 403;
+    const error = new Error("Username not found"); // siempre tiene que ser ambiguo por seguridad
+    error.statusCode = 403;
+    error.customMessage = "Username or password are worng";
+
     next(error);
     // res.status(404).json({ msg: "user not find" });
     // return; // si llega aqui interrumpe el flijo y no intenta enviar la response de la linea de abajo
@@ -25,8 +27,10 @@ const loginUser = async (req, res, next) => {
     };
 
     if (!rightPassword) {
-      const error = new Error("Username or password are worng");
+      const error = new Error("Password is worng");
       error.code = 403;
+      error.customMessage = "Username or password are worng";
+
       next(error);
     }
     // npm i jsonwebtoken

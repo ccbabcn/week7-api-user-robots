@@ -13,7 +13,7 @@ robotsRouter.get("/", getRobots); // llega desde el index del servidor y enruta 
 robotsRouter.delete("/delete/:idRobot", deleteRobot);
 
 // npm i multer para poder tratar con datos json y binarios
-const upload = multer({ dest: path.join("uploads", "images") });
+const upload = multer({ dest: path.join("uploads", "images"), limits });
 
 robotsRouter.post(
   "/create/:robot",

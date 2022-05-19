@@ -33,15 +33,19 @@ const createRobot = async (req, res, next) => {
   try {
     // ha de ser asincrono para que no bloque el hilo de la ejecuccion
     // por ejemplo 100 usuarios a la vez guardando una imagen, en ocasiones se podria hacer sincrono fs.renamSync()
+    const newfileName = `${Date.now()}-${file.originalname}`;
+    const newfileNameUrl = `uploads\\images\\${newfileName}`;
+
     fs.rename(
       path.join("uploads", "images", file.filename),
-      path.join("uploads", "images", file.originalname),
+      path.join("uploads", "images", newfileName),
       async (error) => {
         if (error) {
           debug(chalk.red(error.message));
           const customError = new Error(error.message);
           customError.message = "Error renaming file";
           customError.statusCode = 500;
+
           next(customError);
 
           return;
@@ -50,7 +54,7 @@ const createRobot = async (req, res, next) => {
 
         const newRobot = await Robot.create({
           ...robot,
-          picture: path.join("uploads", "images", file.originalname),
+          picture: path.join("images", newfileNameUrl),
         });
 
         res.status(200).json({ robot: newRobot });

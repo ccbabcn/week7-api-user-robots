@@ -21,6 +21,7 @@ app.use(express.json()); // metodo de express que del paquete de informacion que
 
 app.use("/robots", auth, robotsRouter); // handlers o manejador de rutas, pasa todas las request que usan /robots* al enroutador
 app.use("/user", userRouter);
+app.use(express.static("uploads")); // sirve los recursos estaticos del interior
 
 app.use(notFoundError);
 app.use(generalError);

@@ -9,7 +9,7 @@ const notFoundError = (req, res) => {
 // eslint-disable-next-line no-unused-vars
 const generalError = (error, re, res, next) => {
   const statusCode = error.statusCode ?? 500;
-  const errorMessage = error.statusCode ? error.message : "general pete";
+  const errorMessage = error.customMessages ? error.message : "general pete";
 
   debug(chalk.redBright(`Internal server error: ${error.message}`));
   res.status(statusCode).json({ msg: errorMessage });

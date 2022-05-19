@@ -16,5 +16,6 @@ const initializeServer = (port) =>
       reject();
     });
   });
+/// process.exit?
 
 module.exports = initializeServer;

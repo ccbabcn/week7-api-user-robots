@@ -5,7 +5,7 @@ const RobotSchema = new Schema({
   velocity: { type: Number },
   resistance: { type: Number },
   created: { type: String },
-  image: { type: String, unique: true }, // campo que debe ser unico dentro de la base de datos
+  image: { type: String, unique: true, required: true }, // campo que debe ser unico dentro de la base de datos
 
   owner: {
     type: Schema.Types.ObjectId,

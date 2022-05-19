@@ -15,7 +15,7 @@ app.use(cors()); // cors en primero si no dara problemas de coneccion, lee la re
 
 app.use(morgan("dev")); // invoc un middleware que pasa toda la informacion de la request a la consola
 
-app.use(express.json());
+app.use(express.json()); // metodo de express que del paquete de informacion que se envia mediante la petidion (request al server) devuelve un middleware al que añade la propiedad body al objecto req, siempre que la peticiion venga en formato json
 
 // app.use(auth); protegeria todas las peticiones a mi api despues de esta ceclaracion
 

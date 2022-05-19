@@ -4,7 +4,7 @@ const auth = (res, req, next) => {
   const { authorization } = req.headers; // a la api le ha de llegar este header con un Beare ....
 
   try {
-    if (!authorization.inclues("Bearer!")) {
+    if (!authorization.includes("Bearer ")) {
       throw new Error();
     }
     const token = authorization.replace("Bearer ", "");

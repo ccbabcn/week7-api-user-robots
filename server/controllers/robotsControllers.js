@@ -1,5 +1,7 @@
 const debug = require("debug")("robots:controllers");
 const chalk = require("chalk");
+const path = require("path");
+const fs = require("fs");
 
 const Robot = require("../../database/models/Robot");
 
@@ -25,8 +27,46 @@ const deleteRobot = async (req, res) => {
   debug(chalk.white("Received a get request to the data base"));
 };
 
+const createRobot = async (req, res, next) => {
+  const robot = req.body;
+  const { file } = req; // de lo que ha añadido upload de muller
+  try {
+    // ha de ser asincrono para que no bloque el hilo de la ejecuccion
+    // por ejemplo 100 usuarios a la vez guardando una imagen, en ocasiones se podria hacer sincrono fs.renamSync()
+    fs.rename(
+      path.join("uploads", "images", file.filename),
+      path.join("uploads", "images", file.originalname),
+      async (error) => {
+        if (error) {
+          debug(chalk.red(error.message));
+          const customError = new Error(error.message);
+          customError.message = "Error renaming file";
+          customError.statusCode = 500;
+          next(customError);
+
+          return;
+        }
+        debug(chalk.green("file renamed correctly"));
+
+        const newRobot = await Robot.create({
+          ...robot,
+          picture: path.join("uploads", "images", file.originalname),
+        });
+
+        res.status(200).json({ robot: newRobot });
+      }
+    );
+  } catch (error) {
+    // const error = new Error("Bad request");
+    error.statusCode = 400;
+    error.customMessage = "Bad request";
+    next(error);
+  }
+};
+
 module.exports = {
   getRobots,
   deleteRobot,
   getRobotsVelocityLess: getRobotsbyOwner,
+  createRobot,
 };

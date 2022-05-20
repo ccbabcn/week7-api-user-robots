@@ -1,5 +1,6 @@
 const debug = require("debug")("robots:middlewares:errors");
 const chalk = require("chalk");
+const { ValidationError } = require("express-validation");
 
 const notFoundError = (req, res) => {
   res.status(404).json({ msg: "404 endpoint Not Found" });
@@ -12,6 +13,10 @@ const generalError = (error, re, res, next) => {
   const errorMessage = error.customMessages ? error.message : "general pete";
 
   debug(chalk.redBright(`Internal server error: ${error.message}`));
+  if (error instanceof ValidationError) {
+    errorMessage = "worng data";
+    debug(JSON.stringify(error.details));
+  }
   res.status(statusCode).json({ msg: errorMessage });
 };
 

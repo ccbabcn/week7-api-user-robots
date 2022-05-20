@@ -5,6 +5,17 @@ const mongoose = require("mongoose");
 const connectDataBase = (connectionString) =>
   new Promise((resolve, reject) => {
     mongoose.set("debug", true);
+    mongoose.set("toJSON", {
+      virtuals: true, // PARA PODER QUITAR IDs
+      transform: (doc, ret) => {
+        const newReturnedJSO = { ...ret };
+        // eslint-disable-next-line no-underscore-dangle
+        delete newReturnedJSO._id;
+        // eslint-disable-next-line no-underscore-dangle
+        delete newReturnedJSO.__v;
+        return newReturnedJSO;
+      },
+    });
     mongoose.connect(connectionString, (error) => {
       if (error) {
         debug(chalk.red("error detected:", error.message));
